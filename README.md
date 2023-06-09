@@ -51,15 +51,13 @@ flutter run
 
 2. Browse the list of available products on the home screen.
 
-3. Tap on Shop Tab to see the list of products.
+3. To add a product to the shopping cart, tap on the `plus` button.
 
-4. To add a product to the shopping cart, tap on the `plus` button.
+4. To clear your shopping cart or remove products from your cart, go to the `Checkout` tab and tap on the `Clear Cart` button also If you want to remove just one product you can tap the `minus` button to remove the desired item of your card.
 
-5. To clear your shopping cart or remove products from your cart, go to the `Checkout` tab and tap on the `Clear Cart` button also If you want to remove just one product you can tap the `minus` button to remove the desired item of your card.
+5. The total price of items in the cart is displayed at the bottom.
 
-6. The total price of items in the cart is displayed at the bottom.
-
-7. The cart UI updates in real-time as products are added or removed, thanks to the usage of streams.
+6. The cart UI updates in real-time as products are added or removed, thanks to the usage of streams.
 
 ## Dependencies
 
