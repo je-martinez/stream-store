@@ -16,6 +16,9 @@ The Stream Store is a simple demonstration of how to use streams in Flutter to b
 
 ## Demo
 
+https://github.com/je-martinez/stream-store/assets/30488583/8c09ccb3-c3fb-47d6-bda9-ef5fe28c9aa5
+
+
 ## Installation
 
 1. Clone the repository:
@@ -50,9 +53,9 @@ flutter run
 
 3. Tap on Shop Tab to see the list of products.
 
-4. To add a product to the shopping cart, tap on the "plus" button.
+4. To add a product to the shopping cart, tap on the `plus` button.
 
-5. To clear your shopping cart or remove products from your cart, go to the "Checkout" tab and tap on the "Clear Cart" button also If you want to remove just one product you can tap the "minus" button to remove the desired item of your card.
+5. To clear your shopping cart or remove products from your cart, go to the `Checkout` tab and tap on the `Clear Cart` button also If you want to remove just one product you can tap the `minus` button to remove the desired item of your card.
 
 6. The total price of items in the cart is displayed at the bottom.
 
