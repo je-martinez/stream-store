@@ -86,16 +86,18 @@ class CheckoutHeader extends StatelessWidget {
 
 class MyProducts extends StatelessWidget {
   final List<Product>? products;
-  const MyProducts({super.key, this.products});
+  final int? index;
+  const MyProducts({super.key, this.products, this.index});
 
   @override
   Widget build(BuildContext context) {
     List<Widget> wProduct = [];
     if (products != null) {
-      for (final item in products!) {
+      for (var i = 0; i < products!.length; i++) {
         wProduct.add(ProductItem(
-          product: item,
+          product: products![i],
           checkout: true,
+          index: i,
         ));
       }
     } else {

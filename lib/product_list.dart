@@ -42,7 +42,9 @@ class ProductList extends StatelessWidget {
 class ProductItem extends StatelessWidget {
   final Product product;
   final bool? checkout;
-  const ProductItem({super.key, required this.product, this.checkout});
+  final int? index;
+  const ProductItem(
+      {super.key, required this.product, this.checkout, this.index});
 
   String get name {
     return product.name;
@@ -92,14 +94,16 @@ class ProductItem extends StatelessWidget {
         name,
       ),
       subtitle: Text(description),
-      trailing: !isCheckout
-          ? IconButton(
-              icon: const Icon(Icons.add),
-              onPressed: () {
-                ShoppingCartBloc().addProduct(product);
-              },
-            )
-          : null,
+      trailing: IconButton(
+        icon: isCheckout ? const Icon(Icons.remove) : const Icon(Icons.add),
+        onPressed: () {
+          if (isCheckout && index != null) {
+            ShoppingCartBloc().removeProduct(index!);
+          } else {
+            ShoppingCartBloc().addProduct(product);
+          }
+        },
+      ),
     );
   }
 }

@@ -19,6 +19,11 @@ class ShoppingCartBloc {
     _cart.add([..._products]);
   }
 
+  removeProduct(int index) {
+    _products.removeAt(index);
+    _cart.add([..._products]);
+  }
+
   clearCart() {
     _products = [];
     _cart.add(_products);
