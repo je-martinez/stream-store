@@ -98,22 +98,5 @@ class MyProducts extends StatelessWidget {
         child: ListView(
       children: wProduct,
     ));
-
-    // return Padding(
-    //     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-    //     child: Column(
-    //       children: [
-    //         const Text(
-    //           "Your Products",
-    //           style: TextStyle(
-    //               color: Colors.grey,
-    //               fontSize: 19,
-    //               fontWeight: FontWeight.bold),
-    //         ),
-    //         ListView(
-    //           children: wProduct,
-    //         )
-    //       ],
-    //     ));
   }
 }
