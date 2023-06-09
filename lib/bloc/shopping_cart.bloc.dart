@@ -26,7 +26,7 @@ class ShoppingCartBloc {
 
   clearCart() {
     _products = [];
-    _cart.add(_products);
+    _cart.add([..._products]);
   }
 
   dispose() {
