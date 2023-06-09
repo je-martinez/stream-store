@@ -19,11 +19,6 @@ class ShoppingCartBloc {
     _cart.add([..._products]);
   }
 
-  removeProduct(int id) {
-    _products.removeWhere((item) => item.id == id);
-    _cart.add([..._products]);
-  }
-
   clearCart() {
     _products = [];
     _cart.add(_products);
