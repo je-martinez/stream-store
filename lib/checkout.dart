@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:stream_store/bloc/shopping_cart.bloc.dart';
 
 import 'models/product.dart';
+import 'product_list.dart';
 
 class Checkout extends StatefulWidget {
   const Checkout({super.key});
@@ -35,6 +36,7 @@ class _CheckoutState extends State<Checkout> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(
           height: 10,
@@ -53,7 +55,8 @@ class ClearCartButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
+    return Center(
+        child: ElevatedButton.icon(
       icon: const Icon(
         Icons.delete,
         color: Colors.white,
@@ -69,16 +72,48 @@ class ClearCartButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         fixedSize: const Size(208, 43),
       ),
-    );
+    ));
   }
 }
 
 class MyProducts extends StatelessWidget {
-  List<Product>? products;
-  MyProducts({super.key, this.products});
+  final List<Product>? products;
+  const MyProducts({super.key, this.products});
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    List<Widget> wProduct = [];
+    if (products != null) {
+      for (final item in products!) {
+        wProduct.add(ProductItem(
+          product: item,
+          checkout: true,
+        ));
+      }
+    } else {
+      wProduct.add(const ListTile(title: Text("No products!")));
+    }
+
+    return Expanded(
+        child: ListView(
+      children: wProduct,
+    ));
+
+    // return Padding(
+    //     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+    //     child: Column(
+    //       children: [
+    //         const Text(
+    //           "Your Products",
+    //           style: TextStyle(
+    //               color: Colors.grey,
+    //               fontSize: 19,
+    //               fontWeight: FontWeight.bold),
+    //         ),
+    //         ListView(
+    //           children: wProduct,
+    //         )
+    //       ],
+    //     ));
   }
 }

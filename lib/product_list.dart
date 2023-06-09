@@ -16,7 +16,7 @@ class ProductList extends StatelessWidget {
               description: "Description for Product A",
               price: 15,
               color: Colors.orange),
-          actionButton: true,
+          checkout: false,
         ),
         ProductItem(
             product: Product(
@@ -25,7 +25,7 @@ class ProductList extends StatelessWidget {
                 description: "Description for Product B",
                 price: 10,
                 color: Colors.red),
-            actionButton: true),
+            checkout: false),
         ProductItem(
             product: Product(
                 id: 3,
@@ -33,7 +33,7 @@ class ProductList extends StatelessWidget {
                 description: "Description for Product C",
                 price: 35,
                 color: Colors.yellow),
-            actionButton: true),
+            checkout: false),
       ],
     );
   }
@@ -41,8 +41,8 @@ class ProductList extends StatelessWidget {
 
 class ProductItem extends StatelessWidget {
   final Product product;
-  final bool? actionButton;
-  const ProductItem({super.key, required this.product, this.actionButton});
+  final bool? checkout;
+  const ProductItem({super.key, required this.product, this.checkout});
 
   String get name {
     return product.name;
@@ -60,8 +60,8 @@ class ProductItem extends StatelessWidget {
     return product.color;
   }
 
-  bool get showButton {
-    return actionButton == null ? false : actionButton!;
+  bool get isCheckout {
+    return checkout == null ? false : checkout!;
   }
 
   @override
@@ -92,7 +92,7 @@ class ProductItem extends StatelessWidget {
         name,
       ),
       subtitle: Text(description),
-      trailing: showButton
+      trailing: !isCheckout
           ? IconButton(
               icon: const Icon(Icons.add),
               onPressed: () {
