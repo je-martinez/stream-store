@@ -9,32 +9,86 @@ class ProductList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        ListTile(
-          leading: const CircleAvatar(child: Text('A')),
-          title: const Text('Headline'),
-          subtitle: const Text('Supporting text'),
-          trailing: IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: () {
-              final newProduct = Product(
-                  id: 25,
-                  name: "Product",
-                  description: "Description",
-                  price: 50);
-              appCart.addProduct(newProduct);
-            },
-          ),
-        )
+        ProductItem(
+            product: Product(
+                id: 1,
+                name: "A Product",
+                description: "Description for Product A",
+                price: 15,
+                color: Colors.orange)),
+        ProductItem(
+            product: Product(
+                id: 2,
+                name: "B Product",
+                description: "Description for Product B",
+                price: 10,
+                color: Colors.red)),
+        ProductItem(
+            product: Product(
+                id: 3,
+                name: "C Product",
+                description: "Description for Product C",
+                price: 35,
+                color: Colors.yellow)),
       ],
     );
   }
 }
 
-class ShoppingCartButton extends StatelessWidget {
-  const ShoppingCartButton({super.key});
+class ProductItem extends StatelessWidget {
+  final Product product;
+  const ProductItem({super.key, required this.product});
+
+  String get name {
+    return product.name;
+  }
+
+  String get description {
+    return product.description;
+  }
+
+  String get price {
+    return product.price.round().toString();
+  }
+
+  Color get color {
+    return product.color;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return ListTile(
+      leading: CircleAvatar(
+        backgroundColor: color,
+        child: Text(
+          price,
+          style: const TextStyle(
+            shadows: [
+              Shadow(
+                offset: Offset(1.0, 1.0),
+                blurRadius: 1.0,
+                color: Color.fromARGB(255, 0, 0, 0),
+              ),
+              Shadow(
+                offset: Offset(1.0, 1.0),
+                blurRadius: 8.0,
+                color: Color.fromARGB(125, 0, 0, 255),
+              ),
+            ],
+            color: Colors.white,
+          ),
+        ),
+      ),
+      title: Text(
+        name,
+      ),
+      subtitle: Text(description),
+      trailing: IconButton(
+        icon: const Icon(Icons.add),
+        onPressed: () {
+          appCart.addProduct(product);
+        },
+      ),
+    );
   }
 }
