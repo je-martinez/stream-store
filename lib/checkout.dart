@@ -1,17 +1,48 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:stream_store/bloc/shopping_cart.bloc.dart';
 
-class Checkout extends StatelessWidget {
+import 'models/product.dart';
+
+class Checkout extends StatefulWidget {
   const Checkout({super.key});
 
   @override
+  State<Checkout> createState() => _CheckoutState();
+}
+
+class _CheckoutState extends State<Checkout> {
+  StreamSubscription<List<Product>>? _streamSubscription;
+  List<Product>? _products;
+
+  @override
+  void initState() {
+    super.initState();
+    _streamSubscription = ShoppingCartBloc.cart.listen((value) {
+      setState(() {
+        _products = value;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _streamSubscription?.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
-        ClearCartButton()
+        const ClearCartButton(),
+        MyProducts(
+          products: _products,
+        )
       ],
     );
   }
@@ -28,7 +59,7 @@ class ClearCartButton extends StatelessWidget {
         color: Colors.white,
       ),
       onPressed: () {
-        appCart.clearCart();
+        ShoppingCartBloc().clearCart();
       },
       label: const Text(
         "Clear Cart",
@@ -39,5 +70,15 @@ class ClearCartButton extends StatelessWidget {
         fixedSize: const Size(208, 43),
       ),
     );
+  }
+}
+
+class MyProducts extends StatelessWidget {
+  List<Product>? products;
+  MyProducts({super.key, this.products});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }

@@ -1,32 +1,35 @@
-import 'dart:async';
-
+import 'package:rxdart/subjects.dart';
 import 'package:stream_store/models/product.dart';
 
 class ShoppingCartBloc {
-  final StreamController<List<Product>> _cart =
-      StreamController<List<Product>>.broadcast();
-  Sink get updateCart => _cart.sink;
-  Stream<List<Product>> get getCart => _cart.stream;
-  List<Product> _products = [];
+  //Make Bloc Singleton
+  static final ShoppingCartBloc _instance = ShoppingCartBloc._internal();
+  ShoppingCartBloc._internal();
+  factory ShoppingCartBloc() {
+    return _instance;
+  }
+  //Actually Fields For Stream Use
+  static final _cart = ReplaySubject<List<Product>>();
+  static final cart = _cart.stream;
+  static List<Product> _products = [];
 
+  //Methods
   addProduct(Product product) {
     _products.add(product);
-    updateCart.add([..._products]);
+    _cart.add([..._products]);
   }
 
   removeProduct(int id) {
     _products.removeWhere((item) => item.id == id);
-    updateCart.add([..._products]);
+    _cart.add([..._products]);
   }
 
   clearCart() {
     _products = [];
-    updateCart.add(_products);
+    _cart.add(_products);
   }
 
   dispose() {
     _cart.close();
   }
 }
-
-final appCart = ShoppingCartBloc();

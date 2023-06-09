@@ -96,7 +96,7 @@ class ProductItem extends StatelessWidget {
           ? IconButton(
               icon: const Icon(Icons.add),
               onPressed: () {
-                appCart.addProduct(product);
+                ShoppingCartBloc().addProduct(product);
               },
             )
           : null,

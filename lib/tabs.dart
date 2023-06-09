@@ -48,7 +48,7 @@ class ShoppingCartCounter extends StatelessWidget {
           width: 10,
         ),
         StreamBuilder(
-            stream: appCart.getCart,
+            stream: ShoppingCartBloc.cart,
             builder: ((context, snapshot) {
               int productCount = 0;
               if (snapshot.hasData) {
