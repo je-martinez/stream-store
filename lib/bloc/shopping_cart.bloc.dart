@@ -4,27 +4,28 @@ import 'package:stream_store/models/product.dart';
 
 class ShoppingCartBloc {
   final StreamController<List<Product>> _cart =
-      StreamController<List<Product>>();
+      StreamController<List<Product>>.broadcast();
   Sink get updateCart => _cart.sink;
   Stream<List<Product>> get getCart => _cart.stream;
+  List<Product> _products = [];
 
   addProduct(Product product) {
-    getCart.take(1).listen((products) {
-      List<Product> newProducts = [...products, product];
-      updateCart.add(newProducts);
-    });
+    _products.add(product);
+    updateCart.add([..._products]);
   }
 
   removeProduct(int id) {
-    getCart.take(1).listen((products) {
-      List<Product> currentProducts = [...products];
-      currentProducts.removeWhere((item) => item.id == id);
-      updateCart.add(currentProducts);
-    });
+    _products.removeWhere((item) => item.id == id);
+    updateCart.add([..._products]);
   }
 
   clearCart(Product product) {
+    _products = [];
     updateCart.add([]);
+  }
+
+  dispose() {
+    _cart.close();
   }
 }
 
