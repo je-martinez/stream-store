@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stream_store/product_list.dart';
 
 import 'bloc/shopping_cart.bloc.dart';
+import 'checkout.dart';
 
 class StoreTabs extends StatelessWidget {
   const StoreTabs({super.key});
@@ -25,7 +26,7 @@ class StoreTabs extends StatelessWidget {
           body: const TabBarView(
             children: [
               ProductList(),
-              Icon(Icons.directions_transit),
+              Checkout(),
             ],
           ),
         ),

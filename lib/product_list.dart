@@ -10,26 +10,30 @@ class ProductList extends StatelessWidget {
     return ListView(
       children: [
         ProductItem(
-            product: Product(
-                id: 1,
-                name: "A Product",
-                description: "Description for Product A",
-                price: 15,
-                color: Colors.orange)),
+          product: Product(
+              id: 1,
+              name: "A Product",
+              description: "Description for Product A",
+              price: 15,
+              color: Colors.orange),
+          actionButton: true,
+        ),
         ProductItem(
             product: Product(
                 id: 2,
                 name: "B Product",
                 description: "Description for Product B",
                 price: 10,
-                color: Colors.red)),
+                color: Colors.red),
+            actionButton: true),
         ProductItem(
             product: Product(
                 id: 3,
                 name: "C Product",
                 description: "Description for Product C",
                 price: 35,
-                color: Colors.yellow)),
+                color: Colors.yellow),
+            actionButton: true),
       ],
     );
   }
@@ -37,7 +41,8 @@ class ProductList extends StatelessWidget {
 
 class ProductItem extends StatelessWidget {
   final Product product;
-  const ProductItem({super.key, required this.product});
+  final bool? actionButton;
+  const ProductItem({super.key, required this.product, this.actionButton});
 
   String get name {
     return product.name;
@@ -53,6 +58,10 @@ class ProductItem extends StatelessWidget {
 
   Color get color {
     return product.color;
+  }
+
+  bool get showButton {
+    return actionButton == null ? false : actionButton!;
   }
 
   @override
@@ -83,12 +92,14 @@ class ProductItem extends StatelessWidget {
         name,
       ),
       subtitle: Text(description),
-      trailing: IconButton(
-        icon: const Icon(Icons.add),
-        onPressed: () {
-          appCart.addProduct(product);
-        },
-      ),
+      trailing: showButton
+          ? IconButton(
+              icon: const Icon(Icons.add),
+              onPressed: () {
+                appCart.addProduct(product);
+              },
+            )
+          : null,
     );
   }
 }
