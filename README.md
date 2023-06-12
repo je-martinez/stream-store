@@ -67,7 +67,7 @@ The app uses the following dependencies:
 
 ## Implementation
 
-We are going to create a Singleton class where we are going to have the functions to modify the Stream. Check `lib/bloc/shopping_cart.bloc.dart`
+We will create a Singleton class where we will have the functions to modify the Stream. Check `lib/bloc/shopping_cart.bloc.dart`
 
 ```
 import 'package:rxdart/subjects.dart';
@@ -111,8 +111,8 @@ class ShoppingCartBloc {
 
 - In the first lines you can see the Singleton class declaration.
 - Replay what? `ReplaySubject`: A special StreamController that captures all of the items that have been added to the controller, and emits those as the first items to any new listener. And we expose the Stream.
-- To make it easier, we are going have a variable to modify and then push their values to the `ReplaySubject`, in this case `List<Product> _products`, and we have a couple of methods for basic handling `addProduct`, `removeProduct` and `clearCart`.
-- And for good practice also, we are going to create a method to dispose this class and close our `ReplaySubject`.
+- To make it easier, we are going to have a variable to modify and then push their values to the `ReplaySubject`, in this case, `List<Product> _products`, and we have a couple of methods for basic handling `addProduct`, `removeProduct` and `clearCart`.
+- And for good practice also, we will create a method to dispose of this class and close our `ReplaySubject`.
 
 Use `stream` on a Widget, in this case we are going to use `StreamBuilder<T>` widget, this is a widget that builds itself based on the latest snapshot of interaction with a Stream. [Read more here](https://api.flutter.dev/flutter/widgets/StreamBuilder-class.html). Check `lib/tabs.dart`
 
@@ -156,10 +156,10 @@ class ShoppingCartCounter extends StatelessWidget {
 
 ### Explanation:
 
-- On our implementation we are going to use the `stream` to count the products on our shopping cart. We just need to specify our stream on the `stream` field in the `StreamBuilder` widget.
-- On the `builder` field, we received two arguments, `context` and `snapshot` we are going to ignore the `context` and just use the `snapshot`, this provided a variety of methods for error handling, access stream data, and validate if the streams has errors or data, so we are going to use check if the snapshot `.hasData` before count, this to prevent count on null values
+- In our implementation, we will use the `stream` to count the products on our shopping cart. We just need to specify our stream on the `stream` field in the `StreamBuilder` widget.
+- On the `builder` field, we received two arguments, `context` and `snapshot` we are going to ignore the `context` and just use the `snapshot`, this provided a variety of methods for error handling, access stream data, and validate if the streams have errors or data, so we are going to use check if the snapshot `.hasData` before the count, this to prevent count on null values
 
-Also we can use streams with the combination State Class on StatefulWidget class. Check `lib/checkout.dart`
+Also, we can use streams with the combination State Class on StatefulWidget class. Check `lib/checkout.dart`
 
 ```
 ...
@@ -204,7 +204,8 @@ class _CheckoutState extends State<Checkout> {
 
 ### Explanation:
 
-- We created a variable to handle our stream subscription `StreamSubscription<List<Product>>` and set the subscription on `initState` method, as you can see on every times our stream's data changed would update our \_product state variable and re-render our Widget, in this case our app checkout.
+- We created a variable to handle our stream subscription `StreamSubscription<List<Product>>` and set the subscription on `initState` method, as you can see every time our stream's data changed would update our \_product state variable and re-render our Widget, in this case, our app `checkout`.
+- And as a good practice every time our Widget is destroyed we cancel our subscription to prevent memory leaks.
 
 ## Contributing
 
